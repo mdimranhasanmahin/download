@@ -5,6 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Download Button with Animation</title>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    .command-container {
+      display: flex;
+      align-items: center;
+      margin-top: 20px;
+    }
+    .command-line {
+      background-color: #f4f4f4;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-family: monospace;
+      overflow-x: auto;
+    }
+    .copy-button {
+      margin-left: 10px;
+      padding: 8px 12px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .copy-button:hover {
+      background-color: #0056b3;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
@@ -15,10 +42,22 @@
       <span class="icon"><img src="download.png"></span>
     </a>
   </div>
-  <div class="terminal-body">
-    <p><span class="prompt">user@machine:</span><span class="path">~$</span> cd path/to/your/project-folder</p>
-    <p><span class="prompt">user@machine:</span><span class="path">~/project-folder$</span> start index.html</p>
+  <h1>Command Line Example</h1>
+  <div class="command-container">
+    <pre class="command-line" id="command">npm install -g create-react-app</pre>
+    <button class="copy-button" onclick="copyCommand()">Copy</button>
   </div>
+
+  <script>
+    function copyCommand() {
+      const commandText = document.getElementById('command').innerText;
+      navigator.clipboard.writeText(commandText).then(() => {
+        alert('Command copied to clipboard!');
+      }).catch(err => {
+        console.error('Failed to copy command: ', err);
+      });
+    }
+  </script>
   <script src="script.js"></script>
 </body>
 </html>
